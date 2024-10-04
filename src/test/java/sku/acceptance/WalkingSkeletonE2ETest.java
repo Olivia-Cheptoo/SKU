@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,22 +27,17 @@ public class WalkingSkeletonE2ETest {
 	}
 
 	private void testLandingPage() throws Exception {
-		mockMvc.perform(get("/")) // Perform a GET request to the landing page
-				.andExpect(status().isOk()) // Expect HTTP status 200 OK
-				.andExpect(content().string(containsString("Welcome to SKU"))); // Expect welcome message in content
+		mockMvc.perform(get("/")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Welcome to SKU")));
 	}
 
 	private void testProductListing() throws Exception {
-		mockMvc.perform(get("/products")) // Perform a GET request to the products page
-				.andExpect(status().isOk()) // Expect HTTP status 200 OK
-				.andExpect(model().attributeExists("products")) // Expect model attribute "products" to exist
-				.andExpect(content().string(containsString("Product List"))); // Expect product list in content
+		mockMvc.perform(get("/products")).andExpect(status().isOk()).andExpect(model().attributeExists("products"))
+				.andExpect(content().string(containsString("Product List")));
 	}
 
 	private void testStockComparison() throws Exception {
-		mockMvc.perform(get("/compare-stock")) // Perform a GET request to the stock comparison page
-				.andExpect(status().isOk()) // Expect HTTP status 200 OK
-				.andExpect(content().string(containsString("Stock Comparison"))); // Expect stock comparison text in
-																					// content
+		mockMvc.perform(get("/compare-stock")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Stock Comparison")));
 	}
 }
